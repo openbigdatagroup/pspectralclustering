@@ -59,11 +59,14 @@ Parallel Spectral Clustering must be run in linux environment with mpich2-1.2.
   * Sample: `mpiexec -n 10 ./evd --eigenvalue 100 --eigenspace 300 --input similarity.txt --eigenvalues_output eigenvalues.txt --eigenvectors_output eigenvectors.txt`
   * Note: this step is time consuming and requires communication between distributed computers,  so you need to choose reasonable number of machines. For example: using tens of machines for 300000 dataset is enough.
 ==Step 4: kmeans==
+  * Flags:
     * `--input`: the eigenvectors input file
     * `--output`: the clustering result
     * `--num_clusters`: the number of clusters. Should be the same with --eigenvalue in evd step.
     * `--kmeans_loop`: the maximum number of loops for kmeans. Default 100 usually works.
     * `--kmeans_threshold`: the stopping criterion for kmeans. Default 1e-3 usually works.
     * `--initialization_method`: `orthogonal_centers` or `random`. Generally, `orthogonal_centers` works better.
+  * Sample: `mpiexec -n 4 ./kmeans --num_clusters 100 --input eigenvectors.txt --output result.txt`
+  * Note: this step is faster than evd,  so you need to choose reasonable number of machines. For example: using 10 machines for 300000 dataset is enough.
 = Check results =
   * Each line is the cluster index assigned to the corresponding instance. The order is the same as the input instance's order.
