@@ -23,7 +23,7 @@ Parallel Spectral Clustering must be run in linux environment with mpich2-1.2.
     * Other machines act as slave and must connect to the master
       * `mpd --daemon -h serverHostName -p 55555`
     * Check whether the environment is setup successfully: on master, run `mpdtrace`, you will see all the slaves. If no machines show up, you must check your mpi setup and refer to mpich2 user manual.
-  * Download Parallel Spectral Clustering package and extract and run `make` in its directory. You will see four binaries generated `compute_distance`/`distance_to_similarity`/`evd`/`kmeans`. We use mpich2 builtin compiler mpicxx to compile, it is a wrap of g++.
+  * Download [http://pspectralclustering.googlecode.com/files/pspectralclustering-beta.tar.gz Parallel Spectral Clustering] package and extract and run `make` in its directory. You will see four binaries generated `compute_distance`/`distance_to_similarity`/`evd`/`kmeans`. We use mpich2 builtin compiler mpicxx to compile, it is a wrap of g++.
 = Prepare datafile =
   * Our datafile is stored using a sparse representation, with one instance per line. Each line is a list of features, of the form featureID:featureValue. It is like `<index1>:<value1> <index2>:<value2> ...` Feature index must be in increasing order.
   * Example: Suppose there are two elements, each with two features. The first one is Feature0: 1, Feature1: 2; The second one is Feature0: 100, Feature1: 200. Then the datafile would look like:
