@@ -5,6 +5,6 @@
 {{{
 Generally, this is another version different from the version we used in the paper. 
 For compute_distance and distance_to_similarity, they are new implementations based on MPICH2 while the ecml paper used mapreduce.
-For evd and kmeans, the core algorithm is the same as the paper but data input and output are different.
+For evd and kmeans, the core algorithm is the same as the paper but data input and output part are a little different.
 Also, we do not have timing statistics for all the steps in opensource version. 
 }}}
