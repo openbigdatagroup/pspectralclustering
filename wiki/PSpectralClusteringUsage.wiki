@@ -36,7 +36,7 @@ Parallel Spectral Clustering must be run in linux environment with mpich2-1.2.
 = Run = 
 ==Step 1: Compute Similarity==
   * Flags:
-    * `--t_nearest_neighbor`: the number of nearest neighbors to keep for the distance matrix.
+    * `--t_nearest_neighbor`: the number of nearest neighbors to keep for the distance matrix. Usually, 100 is enough.
     * `--input`: the input datafile
     * `--output`: the output datafile
   * Sample: `mpiexec -n 32 ./compute_distance --t_nearest_neighbor 10 --input data.txt --output distance.txt`
