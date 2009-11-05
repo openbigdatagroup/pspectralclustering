@@ -8,3 +8,6 @@ For compute_distance and distance_to_similarity, they are new implementations ba
 For evd and kmeans, the core algorithm is the same as the paper but data input and output part are a little different.
 Also, we do not have timing statistics for all the steps in opensource version. 
 }}}
+
+= Known Problems =
+  # The output phase of compute_distance and distance_to_similarity is not optimized so that outputting data to disk is a bit slow for these two steps.
