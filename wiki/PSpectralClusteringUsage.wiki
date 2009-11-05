@@ -57,7 +57,7 @@ Parallel Spectral Clustering must be run in linux environment with mpich2-1.2.
     * `--arpack_iterations`: The maximum number of arnoldi iterations to compute eigenvalues. Default 300 usually works.  Refer to arpack users' guide for details.
     * `--arpack_tolerance`: the stopping criterion to stop eigenvalues computing iterations. Default is 0 which is actually not 0 but a very small value related to machine precision. Default usually works . If you wish to make it converge faster and just need approximated eigenvalues, you could set this to a larger value such as 0.001 or 0.0001. 
   * Sample: `mpiexec -n 10 ./evd --eigenvalue 100 --eigenspace 300 --input similarity.txt --eigenvalues_output eigenvalues.txt --eigenvectors_output eigenvectors.txt`
-  * Note: this step is time consuming and requires communication between distributed computers. So choose reasonable number of machines. For example: using tens of machines for 300000 dataset is enough.
+  * Note: this step is time consuming and requires communication between distributed computers,  so you need to choose reasonable number of machines. For example: using tens of machines for 300000 dataset is enough.
 ==Step 4: kmeans==
     * `--input`: the eigenvectors input file
     * `--output`: the clustering result
