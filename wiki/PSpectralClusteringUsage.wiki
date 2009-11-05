@@ -31,6 +31,39 @@ Parallel Spectral Clustering must be run in linux environment with mpich2-1.2.
 0:1    1:2
 0:100  1:200
 }}}
-You could also use our sample data file in testdata/data.txt
+  * You could also use our sample data file in `testdata/data.txt`. The data file must be put in a shared directory so that every machine could access it.
+
 = Run = 
-  
+==Step 1: Compute Similarity==
+  * Flags:
+    * `--t_nearest_neighbor`: the number of nearest neighbors to keep for the distance matrix.
+    * `--input`: the input datafile
+    * `--output`: the output datafile
+  * Sample: `mpiexec -n 32 ./compute_distance --t_nearest_neighbor 10 --input data.txt --output distance.txt`
+  * Note: this step is very time consuming. Try to use as many machines as possible if data set is large.
+==Step 2: distance_to_similarity==
+  * Flags:
+    * `--input`: the input distance file
+    * `--output`: the output similarity file
+  * Sample: `mpiexec -n 2 ./distance_to_similarity --input distance.txt --output similarity.txt`
+  * Note: this step is fast. A few machines will be enough.
+==Step 3: evd==
+  * Flags:
+    * `--input`: the input similarity file
+    * `--eigenvalues_output`: the file to output eigenvalues
+    * `--eigenvectors_output`: the file to output eigenvectors
+    * `--eigenvalue`: the number of clusters desired
+    * `--eigenspace`: the eigenspace to compute eigenvalues. Emperically, set this to 2*eigenvalue or 3*eigenvalue. Refer to arpack users' guide for details.
+    * `--arpack_iterations`: The maximum number of arnoldi iterations to compute eigenvalues. Default 300 usually works.  Refer to arpack users' guide for details.
+    * `--arpack_tolerance`: the stopping criterion to stop eigenvalues computing iterations. Default is 0 which is actually not 0 but a very small value related to machine precision. Default usually works . If you wish to make it converge faster and just need approximated eigenvalues. You could set this to a larger value such as 0.001 or 0.0001. 
+  * Sample: `mpiexec -n 10 ./evd --eigenvalue 100 --eigenspace 300 --input similarity.txt --eigenvalues_output eigenvalues.txt --eigenvectors_output eigenvectors.txt`
+  * Note: this step is time consuming and requires communication between distributed computers. So choose reasonable number of machines. For example: using tens of machines for 300000 dataset is enough.
+==Step 4: kmeans==
+    * `--input`: the eigenvectors input file
+    * `--output`: the clustering result
+    * `--num_clusters`: the number of clusters. Should be the same with --eigenvalue in evd step.
+    * `--kmeans_loop`: the maximum number of loops for kmeans. Default 100 usually works.
+    * `--kmeans_threshold`: the stopping criterion for kmeans. Default 1e-3 usually works.
+    * `--initialization_method`: `orthogonal_centers` or `random`. Generally, `orthogonal_centers` works better.
+= Check results =
+  * Each line is the cluster index assigned to the corresponding instance. The order is the same as the input instance's order.
