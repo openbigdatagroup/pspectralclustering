@@ -14,7 +14,7 @@
 
 #include "common.h"
 #include "evd.h"
-#include "f2c.h"
+#include "f2c/f2c.h"
 
 struct a {
   long int mpi_bottom__, mpi_integer__, mpi_real__, mpi_double_precision__,

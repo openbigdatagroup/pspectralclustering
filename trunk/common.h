@@ -16,6 +16,8 @@
 #define _OPENSOURCE_PSC_COMMON_H__
 
 #include <stdlib.h>
+#include <string.h>
+#include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <sstream>
