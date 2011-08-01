@@ -2,7 +2,8 @@
 
 = Introduction =
 
-Parallel Spectral Clustering must be run in linux environment with mpich2-1.2.
+Parallel Spectral Clustering must be run in linux 64bit environment with mpich2-1.2.
+*NOTE*: there are some problems on 32bit platform and I haven't got time to figure out yet.
 
 = Installation = 
 
